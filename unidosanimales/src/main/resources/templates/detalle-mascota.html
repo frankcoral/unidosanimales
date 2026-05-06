@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle de mascota</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<header>
+    <h1>Detalle de mascota</h1>
+    <nav>
+        <a th:href="@{/}">Inicio</a>
+        <a th:href="@{/mascotas}">Mascotas</a>
+    </nav>
+</header>
+
+<main>
+    <div class="detalle-card">
+        <img th:src="${mascota.imagenUrl}" th:alt="${mascota.nombre}">
+        <div>
+            <h2 th:text="${mascota.nombre}"></h2>
+            <p><strong>Especie:</strong> <span th:text="${mascota.especie}"></span></p>
+            <p><strong>Raza:</strong> <span th:text="${mascota.raza}"></span></p>
+            <p><strong>Edad:</strong> <span th:text="${mascota.edad}"></span> años</p>
+            <p><strong>Descripción:</strong> <span th:text="${mascota.descripcion}"></span></p>
+            <a th:href="@{'/adopcion/' + ${mascota.id}}" class="btn">Solicitar adopción</a>
+        </div>
+    </div>
+</main>
+</body>
+</html>

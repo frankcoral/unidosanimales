@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel administrativo</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<header>
+    <h1>Panel administrativo</h1>
+    <nav>
+        <a th:href="@{/}">Inicio</a>
+        <a th:href="@{/logout}">Cerrar sesión</a>
+    </nav>
+</header>
+
+<main>
+    <section>
+        <h2>Mascotas registradas</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Especie</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="mascota : ${mascotas}">
+                    <td th:text="${mascota.id}"></td>
+                    <td th:text="${mascota.nombre}"></td>
+                    <td th:text="${mascota.especie}"></td>
+                    <td th:text="${mascota.estado}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section>
+        <h2>Solicitudes de adopción</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Solicitante</th>
+                    <th>Correo</th>
+                    <th>Mascota</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="solicitud : ${solicitudes}">
+                    <td th:text="${solicitud.id}"></td>
+                    <td th:text="${solicitud.nombreSolicitante}"></td>
+                    <td th:text="${solicitud.correo}"></td>
+                    <td th:text="${solicitud.mascota.nombre}"></td>
+                    <td th:text="${solicitud.estado}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+</body>
+</html>

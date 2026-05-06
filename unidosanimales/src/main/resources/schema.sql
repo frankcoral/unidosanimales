@@ -1,0 +1,33 @@
+CREATE DATABASE IF NOT EXISTS unidosanimales_db;
+USE unidosanimales_db;
+
+CREATE TABLE IF NOT EXISTS mascotas (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    especie VARCHAR(255) NOT NULL,
+    raza VARCHAR(255) NOT NULL,
+    edad INT NOT NULL,
+    descripcion VARCHAR(255) NOT NULL,
+    imagen_url VARCHAR(255) NOT NULL,
+    estado ENUM('DISPONIBLE','ADOPTADA','RESERVADA') NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS usuarios (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    rol ENUM('ADMIN','COORDINADOR','USUARIO') NOT NULL,
+    enabled BIT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS solicitudes_adopcion (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    nombre_solicitante VARCHAR(255) NOT NULL,
+    correo VARCHAR(255) NOT NULL,
+    telefono VARCHAR(255) NOT NULL,
+    motivo VARCHAR(1000) NOT NULL,
+    mascota_id BIGINT NOT NULL,
+    estado ENUM('PENDIENTE','APROBADA','RECHAZADA') NOT NULL,
+    CONSTRAINT fk_solicitud_mascota FOREIGN KEY (mascota_id) REFERENCES mascotas(id)
+);

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario de adopción</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<header>
+    <h1>Formulario de adopción</h1>
+    <nav>
+        <a th:href="@{/}">Inicio</a>
+        <a th:href="@{/mascotas}">Mascotas</a>
+    </nav>
+</header>
+
+<main>
+    <div class="form-container">
+        <h2 th:text="'Solicitud para adoptar a ' + ${mascota.nombre}"></h2>
+
+        <form th:action="@{/adopcion}" th:object="${solicitud}" method="post">
+            <input type="hidden" th:field="*{mascota.id}">
+
+            <label>Nombre</label>
+            <input type="text" th:field="*{nombreSolicitante}">
+            <small class="error" th:if="${#fields.hasErrors('nombreSolicitante')}" th:errors="*{nombreSolicitante}"></small>
+
+            <label>Correo</label>
+            <input type="email" th:field="*{correo}">
+            <small class="error" th:if="${#fields.hasErrors('correo')}" th:errors="*{correo}"></small>
+
+            <label>Teléfono</label>
+            <input type="text" th:field="*{telefono}">
+            <small class="error" th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></small>
+
+            <label>Motivo de adopción</label>
+            <textarea th:field="*{motivo}" rows="5"></textarea>
+            <small class="error" th:if="${#fields.hasErrors('motivo')}" th:errors="*{motivo}"></small>
+
+            <button type="submit" class="btn">Enviar solicitud</button>
+        </form>
+    </div>
+</main>
+</body>
+</html>

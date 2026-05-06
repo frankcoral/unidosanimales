@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Mascotas disponibles</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<header>
+    <h1>Mascotas disponibles</h1>
+    <nav>
+        <a th:href="@{/}">Inicio</a>
+        <a th:href="@{/mascotas}">Mascotas</a>
+        <a th:href="@{/login}">Login</a>
+    </nav>
+</header>
+
+<main>
+    <div class="card-container">
+        <div class="card" th:each="mascota : ${mascotas}">
+            <img th:src="${mascota.imagenUrl}" th:alt="${mascota.nombre}">
+            <h3 th:text="${mascota.nombre}"></h3>
+            <p><strong>Especie:</strong> <span th:text="${mascota.especie}"></span></p>
+            <p><strong>Raza:</strong> <span th:text="${mascota.raza}"></span></p>
+            <p><strong>Edad:</strong> <span th:text="${mascota.edad}"></span> años</p>
+            <a th:href="@{'/mascotas/' + ${mascota.id}}" class="btn">Ver detalle</a>
+        </div>
+    </div>
+</main>
+</body>
+</html>

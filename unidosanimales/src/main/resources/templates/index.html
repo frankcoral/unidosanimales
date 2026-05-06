@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Unidos por los Animales</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<header>
+    <h1>Unidos por los Animales</h1>
+    <nav>
+        <a th:href="@{/}">Inicio</a>
+        <a th:href="@{/mascotas}">Mascotas</a>
+        <a th:href="@{/login}">Login</a>
+        <a th:href="@{/admin}">Panel</a>
+    </nav>
+</header>
+
+<main>
+    <section class="hero">
+        <h2>Encuentra un nuevo mejor amigo</h2>
+        <p>Conecta con mascotas que buscan un hogar lleno de amor y cuidado.</p>
+    </section>
+
+    <section>
+        <h2>Mascotas disponibles</h2>
+
+        <div th:if="${param.solicitudOk}" class="mensaje-exito">
+            Solicitud enviada correctamente.
+        </div>
+
+        <div class="card-container">
+            <div class="card" th:each="mascota : ${mascotas}">
+                <img th:src="${mascota.imagenUrl}" th:alt="${mascota.nombre}">
+                <h3 th:text="${mascota.nombre}"></h3>
+                <p><strong>Especie:</strong> <span th:text="${mascota.especie}"></span></p>
+                <p><strong>Raza:</strong> <span th:text="${mascota.raza}"></span></p>
+                <p><strong>Edad:</strong> <span th:text="${mascota.edad}"></span> años</p>
+                <a th:href="@{'/mascotas/' + ${mascota.id}}" class="btn">Ver detalle</a>
+            </div>
+        </div>
+    </section>
+</main>
+</body>
+</html>
